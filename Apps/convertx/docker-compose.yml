@@ -6,7 +6,7 @@
 # 🎯 특별 학습 포인트: Root 권한이 필요한 특수 케이스!
 # ============================================================================
 
-name: convertX
+name: convertx
 
 services:
   convertx:
@@ -134,7 +134,7 @@ x-casaos:
   webui_port: 3000
   
   # 🔍 힌트: name과 동일
-  store_app_id: convertX
+  store_app_id: convertx
   
   is_uncontrolled: false
 
