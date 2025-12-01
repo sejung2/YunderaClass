@@ -12,7 +12,7 @@ services:
   convertx:
     # 🔍 힌트: GitHub Container Registry 이미지, v0.14.1 버전
     #          형식: ghcr.io/작성자/이미지이름:버전
-    image: ghcr.io/C4illin/convertx:v0.14.1
+    image: ghcr.io/c4illin/convertx:v0.14.1
     
     container_name: convertx
     restart: unless-stopped
