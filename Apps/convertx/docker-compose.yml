@@ -1,0 +1,67 @@
+name: convertX
+
+services:
+  convertx:
+    image: ghcr.io/c4illin/convertx:v0.14.1
+    container_name: convertx
+    restart: unless-stopped
+    expose:
+      - 3000
+    user: 0:0
+    environment:
+      - PUID=0
+      - PGID=0
+      - JWT-SECRET=$default_pwd
+      - ACCOUNT_REGISTRATION=false
+      - HTTP_ALLOWED=true
+      - ALLOW_UNAUTHENTICATED=false
+      - AUTO_DELETE_EVERY_N_HOURS=24
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+
+    volumes:
+      - /DATA/AppData/$AppID/data:/app/data
+      - /DATA/Downloads:/downloads:ro
+      - /DATA/Documents:/documents:ro
+
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--tries=1", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  x-casaos:
+    architectures:
+      - amd64
+      - arm64
+    main: ConvertX
+    pre-install-cmd: |
+      # mkdir -p  /DATA/AppData/$AppID/data &&
+      # chmod -R 777 /DATA/AppData/$AppID.data
+    author : seingdev
+    category: utilities
+    developer: C4llin
+    icon: https://jcdn.jsdeliver.net/gh/sejung2/YunderaClass@main/Apps/Convertx/icon.png
+    screenshot_link:
+      - https://jcdn.jsdeliver.net/gh/sejung2/YunderaClass@main/Apps/Convertx/screenshot-1
+      - https://jcdn.jsdeliver.net/gh/sejung2/YunderaClass@main/Apps/Convertx/screenshot-2
+      - https://jcdn.jsdeliver.net/gh/sejung2/YunderaClass@main/Apps/Convertx/screenshot-3
+    title:
+      en_us: Convertx
+      ko_kr: Convertx
+    tagline:
+      en_us: tagline Convertx123
+      ko_kr: tagline 한국어입니다.
+    description:
+      en_us: description Convertx123
+      ko_kr: description 한국어입니다.
+    tips:
+      before_install:
+        en_us: before_install Convertx123
+        ko_kr: before_install 한국어입니다.
+    index: /
+    webui_port: 3000
